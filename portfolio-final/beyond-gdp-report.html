@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Full Beyond GDP dataset and methodology." />
+  <title>Beyond GDP — Full report</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f3efe5;
+      --cream-soft: #fbf8f1;
+      --ink: #20201f;
+      --blue: #6472ff;
+      --lime: #d7f85b;
+      --coral: #ff6f4f;
+      --line: rgba(32, 32, 31, 0.2);
+      --shell: min(1380px, calc(100% - 56px));
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    h1, h2, h3, p { margin: 0; }
+    .shell { width: var(--shell); margin-inline: auto; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+    }
+    .wordmark {
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+    }
+    .wordmark span { margin-left: 4px; color: var(--coral); font-size: 0.62rem; vertical-align: top; }
+    .back {
+      padding: 11px 17px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-size: 0.86rem;
+      text-decoration: none;
+    }
+    .hero { padding: 12px 0 70px; }
+    .hero-card {
+      padding: clamp(34px, 6vw, 82px);
+      border: 1px solid var(--ink);
+      border-radius: 34px;
+      background: var(--cream-soft);
+    }
+    .kicker, .section-index {
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 1050px;
+      margin: 80px 0 55px;
+      font-size: clamp(4rem, 9vw, 9rem);
+      font-weight: 500;
+      letter-spacing: -0.075em;
+      line-height: 0.83;
+    }
+    h1 em, h2 em {
+      color: var(--blue);
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400;
+    }
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: minmax(0, 660px) auto;
+      gap: 40px;
+      align-items: end;
+    }
+    .hero-bottom > p { font-size: 1.15rem; line-height: 1.6; }
+    .status {
+      padding: 10px 14px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.76rem;
+      white-space: nowrap;
+    }
+    .section { padding: 100px 0; }
+    .section-blue { background: var(--blue); color: white; }
+    .section-dark { background: var(--ink); color: var(--cream-soft); }
+    .heading {
+      display: grid;
+      grid-template-columns: 1.2fr 0.7fr;
+      gap: 70px;
+      align-items: end;
+      margin-bottom: 55px;
+    }
+    h2 {
+      margin-top: 20px;
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 500;
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+    }
+    .heading > p { line-height: 1.6; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+    }
+    .metric { padding: 28px; border-right: 1px solid currentColor; }
+    .metric:last-child { border-right: 0; }
+    .metric strong {
+      display: block;
+      margin-bottom: 38px;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 400;
+      line-height: 0.85;
+    }
+    .metric span { font-size: 0.82rem; line-height: 1.4; }
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .method-card {
+      min-height: 270px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 22px;
+    }
+    .method-card span { font-size: 0.72rem; letter-spacing: .1em; text-transform: uppercase; }
+    .method-card h3 { margin: 45px 0 16px; font-size: 1.55rem; }
+    .method-card p { font-size: 0.9rem; line-height: 1.6; opacity: .8; }
+    .table-tools {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    input {
+      width: min(500px, 100%);
+      padding: 15px 17px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--cream-soft);
+      color: var(--ink);
+      font: inherit;
+    }
+    button {
+      padding: 15px 18px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--lime);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--cream-soft);
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 15px 18px; border-bottom: 1px solid var(--line); text-align: left; }
+    th {
+      position: sticky;
+      top: 0;
+      background: var(--ink);
+      color: white;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    td { font-size: 0.88rem; }
+    td:nth-child(4), td:nth-child(5), th:nth-child(4), th:nth-child(5) { text-align: right; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: rgba(100,114,255,.08); }
+    .loading, .error {
+      padding: 42px;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .error { color: #9d2e1d; }
+    .note {
+      margin-top: 24px;
+      padding: 24px;
+      border-left: 5px solid var(--coral);
+      background: var(--cream-soft);
+      line-height: 1.6;
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 30px 0 42px;
+      border-top: 1px solid var(--line);
+      font-size: 0.8rem;
+    }
+    @media (max-width: 850px) {
+      .hero-bottom, .heading { grid-template-columns: 1fr; gap: 28px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid currentColor; }
+      .method-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      :root { --shell: min(100% - 28px, 1380px); }
+      .hero-card { border-radius: 24px; }
+      h1 { margin: 65px 0 45px; }
+      .section { padding: 72px 0; }
+      .metrics { grid-template-columns: 1fr; }
+      .metric { border-right: 0; border-bottom: 1px solid currentColor; }
+      .metric:last-child { border-bottom: 0; }
+      .table-tools { flex-direction: column; }
+      button { width: 100%; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="shell">
+    <a class="wordmark" href="beyond-gdp-preview.html">Sigge Stenberg<span>®</span></a>
+    <a class="back" href="beyond-gdp-preview.html">← Back to overview</a>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <div class="hero-card">
+        <p class="kicker">Beyond GDP / Full report / 2019</p>
+        <h1>The data behind <em>the idea.</em></h1>
+        <div class="hero-bottom">
+          <p>This page contains the complete dataset, calculated relationship and methodology behind the Beyond GDP paper prototype.</p>
+          <span class="status" id="data-status">Loading API data…</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-blue">
+      <div class="shell">
+        <div class="heading">
+          <div><p class="section-index">01 / Summary</p><h2>One pattern.<br /><em>Many exceptions.</em></h2></div>
+          <p>The summary updates when the two APIs finish loading and the country records have been matched.</p>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong id="country-count">—</strong><span>Matched countries</span></div>
+          <div class="metric"><strong id="correlation">—</strong><span>Correlation using logarithmic GDP</span></div>
+          <div class="metric"><strong id="average-life">—</strong><span>Average life expectancy</span></div>
+          <div class="metric"><strong id="median-gdp">—</strong><span>Median GDP per capita</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="shell">
+        <div class="heading">
+          <div><p class="section-index">02 / Methodology</p><h2>How the data<br /><em>was connected.</em></h2></div>
+          <p>Both sources use country identifiers. WHO’s numerical M49 codes are converted to ISO3 codes before the datasets are joined.</p>
+        </div>
+        <div class="method-grid">
+          <article class="method-card"><span>Source 01</span><h3>World Bank API</h3><p>GDP per capita in current US dollars for 2019.</p></article>
+          <article class="method-card"><span>Source 02</span><h3>WHO API</h3><p>Life expectancy at birth for the total population in 2019.</p></article>
+          <article class="method-card"><span>Calculation</span><h3>Pearson correlation</h3><p>GDP is transformed to a logarithmic scale because the difference between national income levels is very large.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="heading">
+          <div><p class="section-index">03 / Complete dataset</p><h2>All matched<br /><em>countries.</em></h2></div>
+          <p>Search by country or country code. Download the combined data as a CSV file for further analysis.</p>
+        </div>
+
+        <div class="table-tools">
+          <input id="search" type="search" placeholder="Search for a country…" aria-label="Search countries" />
+          <button id="download" type="button" disabled>Download CSV ↓</button>
+        </div>
+
+        <div class="table-wrap">
+          <p class="loading" id="loading">Loading the World Bank and WHO datasets…</p>
+          <table id="data-table" hidden>
+            <thead><tr><th>Code</th><th>Country</th><th>Year</th><th>GDP per capita</th><th>Life expectancy</th></tr></thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+
+        <p class="note"><strong>Important:</strong> Correlation does not mean causation. GDP and life expectancy are influenced by healthcare, inequality, education, conflict, lifestyle and several other factors.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell"><span>Beyond GDP — Full report</span><span>© 2026 Sigge Stenberg</span><a href="#top">Back to top ↑</a></footer>
+
+  <script>
+    const YEAR = 2019;
+    let combinedData = [];
+
+    const worldBankUrl =
+      "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD" +
+      `?format=json&date=${YEAR}&per_page=400`;
+
+    function whoLifeUrl() {
+      const params = new URLSearchParams({
+        $filter: `IND_CODE eq 'WHOSIS_000001' and DIM_TIME eq '${YEAR}' and DIM_GEO_CODE_TYPE eq 'COUNTRY' and DIM_MEMBER_1_CODE eq 'TOTAL'`,
+        $select: "DIM_TIME,DIM_GEO_CODE_M49,VALUE_NUMERIC",
+        $top: "500"
+      });
+      return `https://xmart-api-public.who.int/DATA_/RELAY_MAY2023?${params}`;
+    }
+
+    function whoCountriesUrl() {
+      const params = new URLSearchParams({
+        $filter: "GEO_CLASS eq 'Country'",
+        $select: "GEO_CODE_M49,GEO_CODE_ISO_3,GEO_NAME_SHORT",
+        $top: "500"
+      });
+      return `https://xmart-api-public.who.int/DATA_/REF_GEO?${params}`;
+    }
+
+    async function getJson(url) {
+      const response = await fetch(url, { headers: { Accept: "application/json" }, cache: "no-store" });
+      if (!response.ok) throw new Error(`API error: ${response.status}`);
+      return response.json();
+    }
+
+    function mean(values) {
+      return values.reduce((sum, value) => sum + value, 0) / values.length;
+    }
+
+    function median(values) {
+      const sorted = [...values].sort((a, b) => a - b);
+      const middle = Math.floor(sorted.length / 2);
+      return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+    }
+
+    function correlation(xValues, yValues) {
+      const xMean = mean(xValues);
+      const yMean = mean(yValues);
+      let numerator = 0;
+      let xSquared = 0;
+      let ySquared = 0;
+      for (let index = 0; index < xValues.length; index++) {
+        const xDifference = xValues[index] - xMean;
+        const yDifference = yValues[index] - yMean;
+        numerator += xDifference * yDifference;
+        xSquared += xDifference ** 2;
+        ySquared += yDifference ** 2;
+      }
+      return numerator / Math.sqrt(xSquared * ySquared);
+    }
+
+    function renderTable(rows) {
+      const body = document.querySelector("#table-body");
+      body.innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.code}</td>
+          <td>${row.country}</td>
+          <td>${row.year}</td>
+          <td>$${row.gdp.toLocaleString("en-US", { maximumFractionDigits: 0 })}</td>
+          <td>${row.life.toFixed(2)} years</td>
+        </tr>
+      `).join("");
+    }
+
+    function csvEscape(value) {
+      const text = String(value);
+      return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+    }
+
+    function downloadCsv() {
+      const header = "country_code,country,year,gdp_per_capita,life_expectancy";
+      const rows = combinedData.map((row) => [row.code, row.country, row.year, row.gdp.toFixed(2), row.life.toFixed(2)].map(csvEscape).join(","));
+      const blob = new Blob([[header, ...rows].join("\n")], { type: "text/csv;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "gdp-life-expectancy.csv";
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+
+    async function loadData() {
+      const status = document.querySelector("#data-status");
+      const loading = document.querySelector("#loading");
+      try {
+        const [worldBank, whoLife, whoCountries] = await Promise.all([
+          getJson(worldBankUrl), getJson(whoLifeUrl()), getJson(whoCountriesUrl())
+        ]);
+
+        const countryByM49 = new Map(
+          whoCountries.value
+            .filter((country) => country.GEO_CODE_ISO_3)
+            .map((country) => [country.GEO_CODE_M49, country.GEO_CODE_ISO_3])
+        );
+
+        const lifeByIso3 = new Map(
+          whoLife.value
+            .map((row) => ({ code: countryByM49.get(row.DIM_GEO_CODE_M49), life: Number(row.VALUE_NUMERIC) }))
+            .filter((row) => row.code && Number.isFinite(row.life))
+            .map((row) => [row.code, row.life])
+        );
+
+        combinedData = worldBank[1]
+          .filter((row) => row.value !== null && lifeByIso3.has(row.countryiso3code))
+          .map((row) => ({
+            code: row.countryiso3code,
+            country: row.country.value,
+            year: Number(row.date),
+            gdp: Number(row.value),
+            life: lifeByIso3.get(row.countryiso3code)
+          }))
+          .sort((a, b) => a.country.localeCompare(b.country));
+
+        const gdp = combinedData.map((row) => row.gdp);
+        const life = combinedData.map((row) => row.life);
+        const logGdp = gdp.map((value) => Math.log10(value));
+
+        document.querySelector("#country-count").textContent = combinedData.length;
+        document.querySelector("#correlation").textContent = correlation(logGdp, life).toFixed(2);
+        document.querySelector("#average-life").textContent = `${mean(life).toFixed(1)}`;
+        document.querySelector("#median-gdp").textContent = `$${median(gdp).toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+
+        renderTable(combinedData);
+        loading.hidden = true;
+        document.querySelector("#data-table").hidden = false;
+        document.querySelector("#download").disabled = false;
+        status.textContent = `${combinedData.length} countries loaded`;
+      } catch (error) {
+        loading.className = "error";
+        loading.textContent = "The live API data could not be loaded. Open the page while connected to the internet and try again.";
+        status.textContent = "API connection failed";
+        console.error(error);
+      }
+    }
+
+    document.querySelector("#search").addEventListener("input", (event) => {
+      const query = event.target.value.trim().toLowerCase();
+      renderTable(combinedData.filter((row) => row.country.toLowerCase().includes(query) || row.code.toLowerCase().includes(query)));
+    });
+    document.querySelector("#download").addEventListener("click", downloadCsv);
+    loadData();
+  </script>
+</body>
+</html>
