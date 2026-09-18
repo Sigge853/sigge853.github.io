@@ -151,7 +151,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <span>Growth Marketing</span>
     <span>Stockholm, Sweden</span>
   </footer>
+<script>
+  window.dataLayer = window.dataLayer || [];
 
+  /* Besök på startsidan */
+  window.dataLayer.push({
+    event: "home_page_view",
+    page_name: "home",
+    page_type: "landing_page"
+  });
+
+  console.log("home_page_view skickades");
+
+  /* Minst 30 sekunder på startsidan */
+  window.setTimeout(function () {
+    window.dataLayer.push({
+      event: "home_page_30_seconds",
+      page_name: "home",
+      page_type: "landing_page",
+      engagement_seconds: 30
+    });
+
+    console.log("home_page_30_seconds skickades");
+  }, 30000);
+</script>
 </body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-52PSTVZL"
