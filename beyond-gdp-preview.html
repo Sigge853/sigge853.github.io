@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){
+  w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),
+  dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-52PSTVZL');
+</script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Beyond GDP — API analysis and paper prototype by Sigge Stenberg." />
@@ -622,5 +636,54 @@
     <span>© 2026 Sigge Stenberg</span>
     <a href="#top">Back to top ↑</a>
   </footer>
+  <script>
+window.dataLayer = window.dataLayer || [];
+
+/* Besök på API-projektet */
+window.dataLayer.push({
+  event: "api_project_view",
+  project_name: "Beyond GDP",
+  project_type: "API mashup"
+});
+
+/* Minst 30 sekunder på projektsidan */
+setTimeout(function () {
+  window.dataLayer.push({
+    event: "api_project_30_seconds",
+    project_name: "Beyond GDP",
+    project_type: "API mashup",
+    engagement_seconds: 30
+  });
+}, 30000);
+
+/* Klick på View full dataset */
+document.addEventListener("DOMContentLoaded", function () {
+  var datasetLink = document.querySelector(
+    'a.data-link[href*="beyond-gdp-report.html"]'
+  );
+
+  if (datasetLink) {
+    datasetLink.addEventListener("click", function () {
+      window.dataLayer.push({
+        event: "api_full_dataset_click",
+        project_name: "Beyond GDP",
+        project_type: "API mashup",
+        link_text: "View full dataset",
+        link_url: datasetLink.href
+      });
+    });
+  }
+});
+</script>
 </body>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-52PSTVZL"
+    height="0"
+    width="0"
+    style="display:none;visibility:hidden">
+  </iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
 </html>
