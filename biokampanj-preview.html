@@ -474,43 +474,49 @@
 
   <footer class="shell"><span>Vad hände med biokvällen? — Portfolioprojekt</span><span>© 2026 Sigge Stenberg</span><a href="#top">Till toppen ↑</a></footer>
   <script>
-window.dataLayer = window.dataLayer || [];
+  window.dataLayer = window.dataLayer || [];
 
-/* Besök på API-projektet */
-window.dataLayer.push({
-  event: "api_project_view",
-  project_name: "Beyond GDP",
-  project_type: "API mashup"
-});
-
-/* Minst 30 sekunder på projektsidan */
-setTimeout(function () {
+  /* Besök på bioprojektet */
   window.dataLayer.push({
-    event: "api_project_30_seconds",
-    project_name: "Beyond GDP",
-    project_type: "API mashup",
-    engagement_seconds: 30
+    event: "bio_project_view",
+    project_name: "Vad hände med biokvällen?",
+    project_type: "Content campaign"
   });
-}, 30000);
 
-/* Klick på View full dataset */
-document.addEventListener("DOMContentLoaded", function () {
-  var datasetLink = document.querySelector(
-    'a.data-link[href*="beyond-gdp-report.html"]'
-  );
+  console.log("bio_project_view skickades");
 
-  if (datasetLink) {
-    datasetLink.addEventListener("click", function () {
-      window.dataLayer.push({
-        event: "api_full_dataset_click",
-        project_name: "Beyond GDP",
-        project_type: "API mashup",
-        link_text: "View full dataset",
-        link_url: datasetLink.href
-      });
+  /* Minst 30 sekunder på projektsidan */
+  window.setTimeout(function () {
+    window.dataLayer.push({
+      event: "bio_project_30_seconds",
+      project_name: "Vad hände med biokvällen?",
+      project_type: "Content campaign",
+      engagement_seconds: 30
     });
-  }
-});
+
+    console.log("bio_project_30_seconds skickades");
+  }, 30000);
+
+  /* Klick på Öppna PDF */
+  document.addEventListener("DOMContentLoaded", function () {
+    var pdfLink = document.querySelector(
+      'a.pdf-button[href*="Biokampanj_Nostalgi_Journalistpaket_Uppdaterad.pdf"]'
+    );
+
+    if (pdfLink) {
+      pdfLink.addEventListener("click", function () {
+        window.dataLayer.push({
+          event: "bio_pdf_click",
+          project_name: "Vad hände med biokvällen?",
+          project_type: "Content campaign",
+          link_text: "Öppna PDF",
+          link_url: pdfLink.href
+        });
+
+        console.log("bio_pdf_click skickades");
+      });
+    }
+  });
 </script>
 </body>
 <!-- Google Tag Manager (noscript) -->
