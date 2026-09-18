@@ -554,7 +554,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <span>© 2026 Sigge Stenberg</span>
     <a href="#main">Back to top ↑</a>
   </footer>
+<script>
+  window.dataLayer = window.dataLayer || [];
 
+  document.addEventListener("DOMContentLoaded", function () {
+    var navigationLinks = document.querySelectorAll(".profile-header nav a");
+
+    navigationLinks.forEach(function (link) {
+      link.addEventListener("click", function () {
+        window.dataLayer.push({
+          event: "navigation_click",
+          navigation_item: link.textContent.replace("↘", "").trim(),
+          navigation_target: link.getAttribute("href")
+        });
+      });
+    });
+  });
+</script>
 </body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-52PSTVZL"
